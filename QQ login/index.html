@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html ng-app>
+<head>
+    <meta charset="UTF-8">
+    <title>QQ登录界面</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/index.css" type="text/css">
+</head>
+<body>
+    <div class="login">
+        <a href="#"><img src="img/qq.png" alt="">&nbsp;QQ登陆</a>
+    </div>
+    <div id="mask" class="mask"></div>
+    <div class="QQlogin" id="QQlogin">
+        <aside></aside>
+        <i class="close"></i>
+        <div class="row down">
+            <div class="col-xs-3 touxiang">
+                <a href="#"></a>
+                <dl>
+                    <dt><a href="#"><span class="online"></span></a></dt>
+                    <dd>
+                        <a href="#"><span class="online"></span>我在线上</a>
+                        <a href="#"><span class="callMe"></span>Q我吧</a>
+                        <a href="#"><span class="away"></span>离开</a>
+                        <a href="#"><span class="busy"></span>忙碌</a>
+                        <a href="#"><span class="silent"></span>请勿打扰</a>
+                        <a href="#"><span class="hid"></span>隐身</a>
+                    </dd>
+                </dl>
+                <i class="people"></i>
+            </div>
+            <div class="col-xs-6 login-box" ng-init="value=false">
+                <input type="text" placeholder="QQ号码/手机/邮箱" ng-model="name">
+                <div class="first" ng-click="value=!value">
+                    <div ng-if="value">
+                        <span></span>
+                        <em></em>
+                        <b>{{name}}</b>
+                    </div>
+                </div>
+                <input type="password" placeholder="密码"><span class="second" ></span>
+                <label><input type="checkbox" class="three">&nbsp;记住密码</label>
+                <label class="auto-login"><input type="checkbox" class="four">&nbsp;自动登录</label>
+                <button class="btn">登&nbsp;&nbsp;&nbsp;&nbsp;录</button>
+            </div>
+            <div class="col-xs-3 register">
+                <a href="#">注册账号</a>
+                <a href="#" class="find-password">找回密码</a>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+    var QQlogin=document.querySelector("#QQlogin");
+    var aside=document.querySelector("#QQlogin aside");
+    var link=document.querySelector("#QQlogin dl dt a");
+    var box=document.querySelector("#QQlogin dl dd");
+    var links=document.querySelectorAll("#QQlogin dl dd a");
+    var mask=document.querySelector("#mask");
+    var qql=document.querySelector("div.login a");
+    var close=document.querySelector("#QQlogin i.close");
+    aside.onmousedown=function(e){
+        var x= e.clientX-QQlogin.offsetLeft;
+        var y= e.clientY-QQlogin.offsetTop;
+        document.onmousemove=function(e){
+            var top=e.clientY-y;
+            var left=e.clientX-x;
+            top=Math.min((Math.max(0,top)),window.innerHeight-QQlogin.offsetHeight);
+            left=Math.min((Math.max(0,left)),window.innerWidth-QQlogin.offsetWidth);
+            QQlogin.style.top= top+"px";
+            QQlogin.style.left= left+"px";
+        };
+        document.onmouseup=function(){
+            this.onmousemove=null;
+            this.onmouseup=null;
+        }
+    };
+    link.onclick=function(e){
+        box.style.display = "block";
+        e.stopPropagation();
+    };
+    document.onclick=function(){
+        box.style.display = "none";
+    };
+    var span=document.querySelector("#QQlogin dl dt a span");
+    for(var i=0;i<links.length;i++){
+        links[i].onclick=function(){
+            span.className=this.querySelector("span").className;
+            span.innerText=this.querySelector("span").innerText;
+
+        }
+
+    }
+    qql.onclick=function (){
+        QQlogin.style.display='block';
+        mask.style.display='block';
+    };
+    close.onclick=function(){
+        QQlogin.style.display='none';
+        mask.style.display='none';
+    }
+</script>
+<script type="text/javascript" src="js/angular.js"></script>
+
+</html>
