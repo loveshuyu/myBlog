@@ -3,46 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
-    <link rel="stylesheet" href="css/css1.css">
+    <link rel="stylesheet" href="css/reset.min.css">
+    <link rel="stylesheet" href="css/swiper.min.css">
+    <link rel="stylesheet/less" href="css/index.less">
+    <script src="js/less-2.5.3.min.js"></script>
 </head>
 <body>
-<div id="box" class="box">
-    <div class="outer">
-        <ul class="inner lub">
-            <li class="nav">
-                <p><a href=""></a></p>
-                <h2>
-                    <a href="" class="s5">International</a>
-                    <a href="">论坛</a>
-                    <a href="">下载</a>
-                    <a href="" class="bg1">首页</a>
-                </h2>
-            </li>
-            <li class="pit1"><a href=""><img src="img/bao1.png" alt=""></a></li>
-            <li class="pit2"><a href=""><img src="img/nt-1.png" alt=""></a></li>
+<header class="header">
+    <nav class="nav clear">
+        <h1><a href=""><img src="img/logo.png" alt=""></a>猎豹</h1>
+        <ul class="afterUl">
+            <li><a href="" class="bg">首页</a></li>
+            <li><a href="">下载</a></li>
+            <li><a href="">论坛</a></li>
+            <li class="int"><a href="">International</a></li>
         </ul>
-        <ul class="inner1">
-            <li class="nav">
-                <p><a href=""></a></p>
-                <h2>
-                    <a href="" class="s5">International</a>
-                    <a href="">论坛</a>
-                    <a href="">下载</a>
-                    <a href="" class="bg1">首页</a>
-                </h2>
+    </nav>
+    <div class="swiper-container swiper-container-child1">
+        <ul class="swiper-wrapper">
+            <li class="swiper-slide inner1">
+                <div class="mb"></div>
+                <div class="pit1 ani" swiper-animate-effect="fadeInRight" swiper-animate-duration="0.7s" ><a href=""><img src="img/bao1.png" alt=""></a></div>
+                <div class="pit2 ani" swiper-animate-effect="zoomIn" swiper-animate-duration="0.7s"><a href=""><img src="img/nt-1.png" alt=""></a></div>
             </li>
-            <li class="pit3"><a href=""><img src="img/bao-2.png" alt=""></a></li>
-            <li class="pit4"><a href=""><img src="img/st-2.png" alt=""><p>全新chrome内核，内存占用低，轻巧炫酷皮肤</p></a>
+            <li class="swiper-slide inner2">
+                <div class="mb"></div>
+                <div class="pit3 ani" swiper-animate-effect="fadeInLeft" swiper-animate-duration="0.7s"><a href=""><img src="img/bao-2.png" alt=""></a></div>
+                <div class="pit4 ani" swiper-animate-effect="fadeInRight" swiper-animate-duration="0.7s"><a href="">
+                    <img src="img/st-2.png" alt="">
+                    <p>全新chrome内核，内存占用低，轻巧炫酷皮肤</p>
+                </a>
+                </div>
             </li>
         </ul>
+        <div class="swiper-button-prev but butLeft"></div>
+        <div class="swiper-button-next but butRight"></div>
     </div>
-    <div class="tib">
-        <span class="bg2 "></span>
-        <span class="bg3"></span>
-    </div>
-    <a href="javascript:;" class="botLeft"><em></em></a>
-    <a href="javascript:;" class="botRight"><em></em></a>
-</div>
+</header>
 <div class="sub">
     <ul >
         <li>
@@ -78,7 +75,8 @@
             <div class="div"><img src="img/qp_new_1.jpg" alt=""></div>
             <div class="hz">
                 <h3><a href="">2016年春运抢票状况百出，最新情况科普</a></h3>
-                <span class="span">2015-11-27&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分享：
+                <span class="span">
+                    2015-11-27&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分享：
                     <a href=""><em class="em1"></em></a>
                     <a href=""><em class="em2"></em></a>
                     <a href=""><em class="em3"></em></a>
@@ -148,47 +146,31 @@
     </div>
     <div class="g">
         <div>
-            <img src="img/code.png" alt="">
+            <img src="img/code.png">
             <span>关注猎豹微信</span>
         </div>
     </div>
 </div>
 </body>
+<script src="js/swiper.min.js"></script>
 <script src="js/utils.js"></script>
 <script src="js/animate.js"></script>
+<script src="js/swiper.animate1.0.2.min.js"></script>
 <script>
-    var banner = document.getElementById("box"),
-            oInner = banner.getElementsByClassName("outer")[0],
-            oUl = banner.getElementsByTagName("ul")[0],
-            bot = banner.getElementsByTagName("a"),
-            oSpan = banner.getElementsByTagName("span"),
-            oDiv = oUl.cloneNode(true);
-    oInner.appendChild(oDiv);
-    var step = 0, autoTime = null;
-    var winW = document.documentElement.clientWidth||document.body.clientWidth;
-    !function(){
-        for(var i=0;i<oSpan.length;i++){
-            var curSpan = oSpan[i];
-            curSpan.index = i;
-            curSpan.onclick = function(){
-                step = this.index;
-                changeTip();
-                animate(oInner,{left: -step *1000},600);
-            }
-        }
-    }();
-    autoTime = window.setInterval(left,2000);
-    function changeTip(){
-        var tempSpan = step>=oSpan.length?0:step;
-        for(var i=0;i<oSpan.length;i++){
-            i === tempSpan ?oSpan[i].className="bg2":oSpan[i].className ="";
-        }
-    }
-    banner.onmouseover =function(){
-        window.clearInterval(autoTime);
-    };
-    banner.onmouseout = function(){
-        autoTime = window.setInterval(left,2000);
-    }
+    var s = new Swiper(".swiper-container", {
+        direction: "horizontal",
+        loop: true,
+        pagination: ".swiper-pagination",
+        paginationClickble:true,
+        slidesPerView:1,
+        spaceBetween:0,
+        speed: 500,
+        autoplay: 4500,
+        prevButton:'.swiper-button-prev',
+        nextButton:'.swiper-button-next',
+        autoplayDisableOnInteraction: false,
+        lazyLoading: true,
+        lazyLoadingInPrevNext: true
+    });
 </script>
 </html>
